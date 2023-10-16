@@ -2,7 +2,18 @@ const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
-const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD, { host: process.env.HOST, dialect: process.env.DIALECT });
+const InitializeService = require('../services/InitializeService');
+const sequelize = new Sequelize(
+  process.env.DATABASE_NAME,
+  process.env.ADMIN_USERNAME,
+  process.env.ADMIN_PASSWORD,
+  {
+    host: process.env.HOST,
+    port: process.env.DBPORT,
+    dialect: process.env.DIALECT,
+    dialectmodel: process.env.DIALECTMODEL,
+  }
+);
 const db = {};
 db.sequelize = sequelize;
 fs.readdirSync(__dirname)
@@ -18,4 +29,12 @@ Object.keys(db).forEach((modelName) => {
     db[modelName].associate(db);
   }
 });
+
+init();
 module.exports = db;
+
+async function init() {
+  await db.sequelize.sync({ force: false });
+  const initializeService = new InitializeService(db);
+  initializeService.initialize();
+}
