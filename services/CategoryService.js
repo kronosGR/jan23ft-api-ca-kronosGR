@@ -11,7 +11,7 @@ class CategoryService {
     return this.Category.create({
       name: name,
       UserId: UserId,
-    });
+    }).catch((e) => {});
   }
 
   async updateCategory(id, name, UserId) {
