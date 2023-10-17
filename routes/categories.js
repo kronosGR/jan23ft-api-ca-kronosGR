@@ -8,7 +8,7 @@ const categoryService = new CategoryService(db);
 
 router.get('/', isAuth, async function (req, res, next) {
   const { id, email, name } = res.locals.tokenData;
-  const categories = await categoryService.getCategories();
+  const categories = await categoryService.getCategories(id);
   res.jsend.success({ statusCode: 200, result: categories });
 });
 

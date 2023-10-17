@@ -3,8 +3,8 @@ class CategoryService {
     this.Category = db.Category;
   }
 
-  async getCategories() {
-    return this.Category.findAll({ where: {} });
+  async getCategories(UserId) {
+    return this.Category.findAll({ where: { UserId: UserId } });
   }
 
   async addCategory(name, UserId) {
