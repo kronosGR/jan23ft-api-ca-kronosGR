@@ -101,7 +101,13 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Add new category for the user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -112,20 +118,12 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "UserId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CategoryAdd"
             }
           }
         ],
         "responses": {
-          "default": {
+          "201, 400": {
             "description": ""
           }
         }
@@ -133,7 +131,13 @@
     },
     "/category/{id}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Update the category",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -150,26 +154,24 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "UserId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CategoryUpdate"
             }
           }
         ],
         "responses": {
-          "default": {
+          "201,400": {
             "description": ""
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Delete a category",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -184,11 +186,47 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "CategoryAdd": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Category name"
+        },
+        "UserId": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "name",
+        "UserId"
+      ]
+    },
+    "CategoryUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Category name"
+        },
+        "UserId": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "name",
+        "UserId"
+      ]
     }
   }
 }

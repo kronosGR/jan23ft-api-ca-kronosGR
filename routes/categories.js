@@ -17,6 +17,17 @@ router.get('/', isAuth, async function (req, res, next) {
 });
 
 router.post('/', isAuth, async function (req, res, next) {
+  // #swagger.tags=['Categories']
+  // #swagger.description = "Add new category for the user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [201, 400]
+  /* #swagger.parameters['body']={
+    "name": "body",  
+    "in":"body",
+    "schema":{
+      $ref: "#/definitions/CategoryAdd"
+    }
+  }*/
   const { name, UserId } = req.body;
 
   if (UserId == null || name == null) {
@@ -28,6 +39,19 @@ router.post('/', isAuth, async function (req, res, next) {
 });
 
 router.put('/:id', isAuth, async function (req, res, next) {
+  // #swagger.tags=['Categories']
+  // #swagger.description = "Update the category"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses=[201,400]
+  /* #swagger.parameters['body']={
+    "name":"body",
+    "in":"body",
+    "schema":{
+      $ref:"#/definitions/CategoryUpdate"
+    }
+  }
+
+  */
   const { name, UserId } = req.body;
   const id = req.params.id;
 
@@ -40,6 +64,10 @@ router.put('/:id', isAuth, async function (req, res, next) {
 });
 
 router.delete('/:id', isAuth, async function (req, res, next) {
+  // #swagger.tags=['Categories']
+  // #swagger.description = "Delete a category"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [200]
   const id = req.params.id;
   await categoryService.deleteCategory(id);
   res.jsend.success({ statusCode: 200, result: 'Category deleted' });

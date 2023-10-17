@@ -7,6 +7,16 @@ const doc = {
     description: 'Documentation for MyTodos',
   },
   host: 'localhost:3000',
+  definitions: {
+    CategoryAdd: {
+      $name: 'Category name',
+      $UserId: '1',
+    },
+    CategoryUpdate: {
+      $name: 'Category name',
+      $UserId: '1',
+    },
+  },
 };
 
 const outputFile = './swagger-output.json';
