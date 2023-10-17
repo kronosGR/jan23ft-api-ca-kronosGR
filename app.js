@@ -7,6 +7,7 @@ var logger = require('morgan');
 var usersRouter = require('./routes/users');
 require('dotenv').config();
 var db = require('./models');
+var jsend = require('jsend');
 
 var app = express();
 
@@ -14,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(jsend.middleware);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,7 +37,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json(jsend.fail({ statusCode: err.status, data: err.message }));
 });
 
 module.exports = app;

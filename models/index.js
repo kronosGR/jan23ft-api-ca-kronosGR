@@ -2,7 +2,9 @@ const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
+require('dotenv').config();
 const InitializeService = require('../services/InitializeService');
+console.log(process.env.DIALECT);
 const sequelize = new Sequelize(
   process.env.DATABASE_NAME,
   process.env.ADMIN_USERNAME,
