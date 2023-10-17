@@ -6,6 +6,9 @@ var logger = require('morgan');
 require('dotenv').config();
 var db = require('./models');
 var jsend = require('jsend');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output.json');
+const bodyParser = require('body-parser');
 
 var usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
@@ -15,6 +18,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(jsend.middleware);
 app.use(logger('dev'));

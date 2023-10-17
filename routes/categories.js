@@ -7,6 +7,10 @@ const createHttpError = require('http-errors');
 const categoryService = new CategoryService(db);
 
 router.get('/', isAuth, async function (req, res, next) {
+  // #swagger.tags = ['Categories']
+  // #swagger.description = "Get the list of categories for the user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [200]
   const { id, email, name } = res.locals.tokenData;
   const categories = await categoryService.getCategories(id);
   res.jsend.success({ statusCode: 200, result: categories });
