@@ -3,11 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var usersRouter = require('./routes/users');
 require('dotenv').config();
 var db = require('./models');
 var jsend = require('jsend');
+
+var usersRouter = require('./routes/users');
+const categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
+app.use('/category', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
