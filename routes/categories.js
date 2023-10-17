@@ -35,4 +35,10 @@ router.put('/:id', isAuth, async function (req, res, next) {
   res.jsend.success({ statusCode: 201, result: 'Category updated' });
 });
 
+router.delete('/:id', isAuth, async function (req, res, next) {
+  const id = req.params.id;
+  await categoryService.deleteCategory(id);
+  res.jsend.success({ statusCode: 200, result: 'Category deleted' });
+});
+
 module.exports = router;
