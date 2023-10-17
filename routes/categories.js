@@ -20,7 +20,19 @@ router.post('/', isAuth, async function (req, res, next) {
   }
 
   await categoryService.addCategory(name, UserId);
-  res.jsend.success({ statusCode: 200, result: 'Category added' });
+  res.jsend.success({ statusCode: 201, result: 'Category added' });
+});
+
+router.put('/:id', isAuth, async function (req, res, next) {
+  const { name, UserId } = req.body;
+  const id = req.params.id;
+
+  if (UserId == null || name == null) {
+    return next(createHttpError(400, 'name and UserId cannot be empty'));
+  }
+
+  await categoryService.updateCategory(id, name, UserId);
+  res.jsend.success({ statusCode: 201, result: 'Category updated' });
 });
 
 module.exports = router;
