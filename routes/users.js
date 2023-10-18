@@ -60,7 +60,12 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const { name, email, password } = req.body;
   if (email == null || password == null || name == null) {
-    return next(createHttpError(400, 'Name, email and password cannot be empty'));
+    return next(
+      createHttpError(
+        400,
+        "There was an error creating your account. 'You need to specify your name, email and password!' "
+      )
+    );
   }
   var salt = crypto.randomBytes(16);
   crypto.pbkdf2(password, salt, 31000, 32, 'sha256', function (err, hashedPassword) {
