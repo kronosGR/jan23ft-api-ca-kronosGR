@@ -30,7 +30,7 @@
           }
         ],
         "responses": {
-          "400, 500": {
+          "200,400, 500": {
             "description": ""
           }
         }
@@ -187,7 +187,13 @@
     },
     "/todo/": {
       "get": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "get all the logged in users todo\\'s with the category associated with each todo and status that is not the deleted status",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -196,13 +202,19 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Add a new todo with their category for the logged in user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -213,29 +225,12 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "CategoryId": {
-                  "example": "any"
-                },
-                "StatusId": {
-                  "example": "any"
-                },
-                "UserId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Todos"
             }
           }
         ],
         "responses": {
-          "default": {
+          "201,400": {
             "description": ""
           }
         }
@@ -243,7 +238,13 @@
     },
     "/todo/all": {
       "get": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Get all the users todos including todos with a deleted status",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -252,15 +253,21 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
     "/todo/deleted": {
       "get": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Get all the todos with the deleted status",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -269,15 +276,21 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
     "/todo/statuses": {
       "get": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Return all the statuses from the database",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -286,15 +299,21 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
     "/todo/{id}": {
       "put": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Change/update a specific todo for logged in user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -311,32 +330,24 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "CategoryId": {
-                  "example": "any"
-                },
-                "StatusId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/TodosUpdate"
             }
           }
         ],
         "responses": {
-          "default": {
+          "201,400": {
             "description": ""
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "TODOs"
+        ],
+        "description": "Delete a specific todo if for the logged in user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -351,8 +362,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -431,6 +442,55 @@
         "email",
         "password"
       ]
+    },
+    "Todos": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Test Todo"
+        },
+        "description": {
+          "type": "string",
+          "example": "A nice todo description"
+        },
+        "CategoryId": {
+          "type": "number",
+          "example": 1
+        },
+        "StatusId": {
+          "type": "number",
+          "example": 1
+        },
+        "UserId": {
+          "type": "number",
+          "example": 1
+        }
+      },
+      "required": [
+        "UserId"
+      ]
+    },
+    "TodosUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Test Todo"
+        },
+        "description": {
+          "type": "string",
+          "example": "A nice todo description"
+        },
+        "CategoryId": {
+          "type": "number",
+          "example": 1
+        },
+        "StatusId": {
+          "type": "number",
+          "example": 1
+        }
+      }
     }
   }
 }
