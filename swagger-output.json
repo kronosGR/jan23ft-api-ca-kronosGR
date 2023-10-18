@@ -13,26 +13,24 @@
   "paths": {
     "/users/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Login for a user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Login"
             }
           }
         ],
         "responses": {
-          "default": {
+          "400, 500": {
             "description": ""
           }
         }
@@ -40,29 +38,24 @@
     },
     "/users/signup": {
       "post": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Sign up for new user",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/SignUp"
             }
           }
         ],
         "responses": {
-          "default": {
+          "200,400": {
             "description": ""
           }
         }
@@ -265,7 +258,7 @@
         }
       }
     },
-    "/tododeleted": {
+    "/todo/deleted": {
       "get": {
         "description": "",
         "parameters": [
@@ -285,6 +278,13 @@
     "/todo/statuses": {
       "get": {
         "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -391,6 +391,45 @@
       "required": [
         "name",
         "UserId"
+      ]
+    },
+    "SignUp": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "kronos"
+        },
+        "email": {
+          "type": "string",
+          "example": "geo.elgeo@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "geo.elgeo@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      },
+      "required": [
+        "email",
+        "password"
       ]
     }
   }

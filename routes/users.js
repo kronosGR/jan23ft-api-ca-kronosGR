@@ -10,6 +10,19 @@ const userService = new UserService(db);
 
 // Post for registered users to be able to login
 router.post('/login', async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  // #swagger.description = "Login for a user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [200,400, 500]
+  /* #swagger.parameters['body']={
+    "name":"body",
+    "in":"body",
+    "schema":{
+      $ref:"#/definitions/Login"
+    }
+  }
+  */
+
   let { email, password } = req.body;
   if (email == null || password == null) {
     return next(createHttpError(400, 'Email and password cannot be empty'));
@@ -58,6 +71,19 @@ router.post('/login', async (req, res, next) => {
 
 // Post for new users to register / signup
 router.post('/signup', (req, res, next) => {
+  // #swagger.tags=['Users']
+  // #swagger.description = "Sign up for new user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses=[200,400]
+  /*
+    #swagger.parameters['body']={
+      "name":"body",
+      "in":"body",
+      "schema":{
+        $ref: "#/definitions/SignUp"
+      }
+    }
+  */
   const { name, email, password } = req.body;
   if (email == null || password == null || name == null) {
     return next(
