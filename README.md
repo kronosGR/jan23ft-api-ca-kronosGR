@@ -2,8 +2,11 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12396363&assignment_repo_type=AssignmentRepo)
 
 ![](http://143.42.108.232/pvt/Noroff-64.png)
+
 # Noroff
+
 ## Back-end Development Year 1
+
 ### REST API - Course Assignment 1 <sup>V2</sup>
 
 Startup code for Noroff back-end development 1 - REST API course.
@@ -25,19 +28,47 @@ If you are unsure of any instructions for the course assignment, contact out to 
 
 # Application Installation and Usage Instructions
 
+### Installation
+
+```
+npm install
+```
+
+### Usage
+
+```
+npm start
+```
 
 # Environment Variables
 
+```
+HOST = ""
+ADMIN_USERNAME = "myTodo"
+ADMIN_PASSWORD = ""
+DATABASE_NAME = "mytodo"
+DIALECT = "mysql"
+DIALECTMODEL = 'mysql2'
+PORT = "3000"
+DBPORT = '3306'
+TOKEN_SECRET=
+```
 
 # Additional Libraries/Packages
 
+- bcrypt
+- jsend
+- jsonwebtoken
+- mysql
+- mysql2
+- sequelize
+- swagger-autogen
+- swagger-ui-express
 
 # NodeJS Version Used
 
+v18.18.0
 
-# POSTMAN Documentation link
+# Swagger Documentation link
 
-
-
-
-
+[http://localhost:3000/doc/](http://localhost:3000/doc/)
