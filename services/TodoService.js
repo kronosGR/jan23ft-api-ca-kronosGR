@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 class TodoService {
   constructor(db) {
     this.Todo = db.Todo;
@@ -26,7 +27,7 @@ class TodoService {
     return await this.Todo.findAll({
       where: {
         UserId: UserId,
-        StatusId: { ne: 4 },
+        StatusId: { [Op.ne]: 4 },
       },
     });
   }
@@ -63,7 +64,7 @@ class TodoService {
   }
 
   async getAllStatuses() {
-    return await this.Status.findAll({ where: {} });
+    return await this.Status.findAll({ where: {}, order: ['id'] });
   }
 }
 

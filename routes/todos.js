@@ -9,27 +9,27 @@ const todoService = new TodoService(db);
 /* Return all the logged in users todo's with the category associated with each todo and
 status that is not the deleted status */
 router.get('/', isAuth, async (req, res) => {
-  const { UserId } = res.locals.tokenData;
+  const { id: UserId } = res.locals.tokenData;
   const data = await todoService.getAllByUserButNotDeleted(UserId);
   res.jsend.success({ statusCode: 200, result: data });
 });
 
 // Return all the users todos including todos with a deleted status
 router.get('/all', isAuth, async (req, res) => {
-  const { UserId } = res.locals.tokenData;
+  const { id: UserId } = res.locals.tokenData;
   const data = await todoService.getAllByUser(UserId);
   res.jsend.success({ statusCode: 200, result: data });
 });
 
 // Return all the todos with the deleted status
-router.get('deleted', isAuth, async (req, res) => {
-  const { UserId } = res.locals.tokenData;
+router.get('/deleted', isAuth, async (req, res) => {
+  const { id: UserId } = res.locals.tokenData;
   const data = await todoService.getDeletedByUser(UserId);
   res.jsend.success({ statusCode: 200, result: data });
 });
 
 // Add a new todo with their category for the logged in user
-router.post('/', isAuth, async (req, res) => {
+router.post('/', isAuth, async (req, res, next) => {
   const { name, description, CategoryId, StatusId, UserId } = req.body;
   if (
     name == null ||
@@ -45,14 +45,14 @@ router.post('/', isAuth, async (req, res) => {
 });
 
 // Return all the statuses from the database
-router.get('/statuses', async (req, res) => {
+router.get('/statuses', isAuth, async (req, res) => {
   const data = await todoService.getAllStatuses();
   res.jsend.success({ statusCode: 200, result: data });
 });
 
 // Change/update a specific todo for logged in user
-router.put('/:id', isAuth, async (req, res) => {
-  const { UserId } = res.locals.tokenData;
+router.put('/:id', isAuth, async (req, res, next) => {
+  const { id: UserId } = res.locals.tokenData;
   const id = req.params.id;
   const { name, description, CategoryId, StatusId } = req.body;
   if (
