@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 
 var usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
+const todoRouter = require('./routes/todos');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/category', categoriesRouter);
+app.use('/todo', todoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

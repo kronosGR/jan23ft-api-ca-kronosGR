@@ -1,9 +1,10 @@
 class TodoService {
   constructor(db) {
     this.Todo = db.Todo;
+    this.Status = db.Status;
   }
 
-  async addCategory(name, description, CategoryId, StatusId, UserId) {
+  async addTodo(name, description, CategoryId, StatusId, UserId) {
     return await this.Todo.create({
       name: name,
       description: description,
@@ -59,6 +60,10 @@ class TodoService {
       },
       { where: { id: id }, returning: true, plain: true }
     );
+  }
+
+  async getAllStatuses() {
+    return await this.Status.findAll({ where: {} });
   }
 }
 
