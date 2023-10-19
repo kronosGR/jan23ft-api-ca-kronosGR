@@ -68,8 +68,9 @@ router.post('/', isAuth, async (req, res, next) => {
   ) {
     return next(createHttpError(400, 'All fields are required'));
   }
-  await todoService.addTodo(name, description, CategoryId, StatusId, UserId);
-  res.jsend.success({ statusCode: 201, result: 'Todo added' });
+  const data = await todoService.addTodo(name, description, CategoryId, StatusId, UserId);
+  console.log(data);
+  res.jsend.success({ statusCode: 201, result: data });
 });
 
 // Return all the statuses from the database
