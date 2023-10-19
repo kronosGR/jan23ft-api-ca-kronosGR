@@ -33,15 +33,34 @@ describe('Testing routes', () => {
       .send({
         name: 'Test Todo',
         description: 'A nice todo description',
-        CategoryId: 6,
+        CategoryId: 1,
         StatusId: 1,
         UserId: 1,
       })
       .set('Authorization', 'Bearer ' + token);
-    console.log(body.data);
     expect(body).toHaveProperty('data');
     expect(body.data).toHaveProperty('result');
     expect(body.data.result).toHaveProperty('id');
     id = body.data.result.id;
+  });
+
+  test('DELETE /todo - Delete created Todo', async () => {
+    const { body } = await request(URL)
+      .delete('/todo/' + id)
+      .set('Authorization', 'Bearer ' + token);
+    expect(body.data.result).toBe('Todo deleted');
+  });
+
+  test('GET /todo - Get all todos without JWT Token', async () => {
+    const { body } = await request(URL).get('/todo');
+
+    expect(body).toHaveProperty('data');
+    expect(body.data.data).toBe('Unauthorized');
+  });
+
+  test('GET /todo Get all todos with wrong JWT Token', async () => {
+    const { body } = await request(URL).get('/todo').set('Authorization', token);
+    expect(body.status).toBe('fail');
+    expect(body.data.data).toBe('Unauthorized');
   });
 });
