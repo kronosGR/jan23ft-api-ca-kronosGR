@@ -40,13 +40,19 @@ npm install
 npm start
 ```
 
+### Run Tests
+
+```
+npm test
+```
+
 # Environment Variables
 
 ```
 HOST = ""
 ADMIN_USERNAME = "myTodo"
 ADMIN_PASSWORD = ""
-DATABASE_NAME = "mytodo"
+DATABASE_NAME = "myTodo"
 DIALECT = "mysql"
 DIALECTMODEL = 'mysql2'
 PORT = "3000"
@@ -64,6 +70,8 @@ TOKEN_SECRET=
 - sequelize
 - swagger-autogen
 - swagger-ui-express
+- jest
+- supertest
 
 # NodeJS Version Used
 
